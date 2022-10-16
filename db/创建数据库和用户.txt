@@ -1,0 +1,18 @@
+# 切换用户
+su - omm  
+# 开启服务
+gs_om -t start
+# 连接数据库
+gsql -d postgres -p 26000 -r [-U username -W password]
+
+-- 创建用户
+CREATE USER joe WITH PASSWORD "Bigdata@123"; 
+CREATE USER db_user WITH PASSWORD "Bigdata@123";
+-- 用户赋权
+ALTER USER joe SYSADMIN;
+ALTER USER db_user LOGIN;
+-- 创建数据库
+CREATE DATABASE server_db;  
+
+# 数据库创建完毕，ctrl+d退出切换到使用joe登录到创建的数据库中，然后执行数据库初始化脚本
+gsql -d server_db -p 26000 -U joe -W Bigdata@123 -r
